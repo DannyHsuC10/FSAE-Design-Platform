@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore Formula SAE engineering tools for vehicle sizing, suspension, powertrain, tires, and lap time simulation.">
+  <meta name="theme-color" content="#102b32">
+  <title>FSAE Design Platform</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./catalog.js"></script>
+  <script defer src="./drawings.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+            <path d="m6 20 5-3 3-7h7l4 10M10 21h13M15 16h6m-9 3 4-6h3"/><circle cx="7.5" cy="22" r="2.5"/><circle cx="24.5" cy="22" r="2.5"/>
+          </svg>
+        </span>
+        <span>FSAE <span class="brand-secondary">Design Platform</span></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#workflow">Workflow</a>
+        <a href="#tools">Tool Library</a>
+        <a href="#resources">Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <h1 id="hero-title">FSAE Design<br>Platform<span>.</span></h1>
+        <p>Engineering tools for Formula SAE vehicle design, from initial sizing to lap time simulation.</p>
+        <a class="button button-hero" href="#tools">Browse tools</a>
+      </div>
+      <canvas class="hero-drawing" id="hero-drawing" width="1200" height="720" aria-hidden="true"></canvas>
+    </section>
+
+    <section class="section workflow-section" id="workflow" aria-labelledby="workflow-title">
+      <header class="section-heading">
+        <h2 id="workflow-title">Engineering Workflow</h2>
+        <p>Follow the design sequence or open a tool at any stage.</p>
+      </header>
+      <ol class="workflow-grid" id="workflow-grid"></ol>
+      <p class="workflow-note">Reuse a track geometry CSV from Track Data Tools in LapSimLab, or import a Kinematics project JSON into Suspension Statics.</p>
+    </section>
+
+    <section class="section library" id="tools" aria-labelledby="library-title">
+      <header class="section-heading library-heading">
+        <h2 id="library-title">Tool Library</h2>
+        <p>Find the right workbench for your next design task.</p>
+      </header>
+      <form class="filters" id="filters" role="search" aria-label="Filter the tool library">
+        <label class="search-field">
+          <span class="visually-hidden">Search tools</span>
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.8"/><path d="m15 15 5 5"/></svg>
+          <input id="search" type="search" placeholder="Search tools, keywords…" autocomplete="off">
+        </label>
+        <label class="select-field">
+          <span class="visually-hidden">Category</span>
+          <select id="category"><option value="">All categories</option></select>
+        </label>
+        <label class="select-field">
+          <span class="visually-hidden">Status</span>
+          <select id="status"><option value="">All statuses</option></select>
+        </label>
+      </form>
+      <p class="result-count" id="result-count" role="status"></p>
+      <div class="tool-grid" id="tool-grid"></div>
+      <div class="empty-state" id="empty-state" hidden>
+        <p>No tools match your filters.</p>
+        <button class="button button-secondary" type="button" id="clear-filters">Clear filters</button>
+      </div>
+      <noscript><p>Enable JavaScript to use the directory, or browse the projects on <a href="https://github.com/DannyHsuC10">GitHub</a>.</p></noscript>
+    </section>
+
+    <section class="section resources" id="resources" aria-labelledby="resources-title">
+      <header class="section-heading"><h2 id="resources-title">Resources</h2></header>
+      <article class="resource-card">
+        <span class="stage-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14M6 9l3 1m-3 3 3 1m6-4 3-1m-3 5 3-1"/></svg>
+        </span>
+        <div><h3>Mechanics Notes</h3><p>Study notes and worked examples in physics and engineering mechanics.</p></div>
+        <a class="button button-secondary" href="https://dannyhsuc10.github.io/Mechanics/">Read notes</a>
+      </article>
+      <article class="resource-card">
+        <span class="stage-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18m-13 5-2 2 2 2m8-4 2 2-2 2"/></svg>
+        </span>
+        <div><h3>Webpage Test Area</h3><p>Web experiments and prototypes.</p></div>
+        <a class="button button-secondary" href="https://dannyhsuc10.github.io/Webpage_Test_Area/">Open test area</a>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>FSAE Design Platform</span>
+      <a href="https://github.com/DannyHsuC10/FSAE-Design-Platform">GitHub repository</a>
+    </div>
+  </footer>
+</body>
+</html>

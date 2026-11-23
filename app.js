@@ -1,6 +1,7 @@
 const pageRoot = "https://dannyhsuc10.github.io/";
 const sourceRoot = "https://github.com/DannyHsuC10/";
-const toolUrl = (tool) => tool.url || (tool.repository ? pageRoot + tool.repository + "/" : "");
+const toolUrl = (tool) => tool.url === undefined && tool.repository ? pageRoot + tool.repository + "/" : tool.url;
+const repositoryUrl = (tool) => tool.repository ? sourceRoot + tool.repository : "";
 
 const iconPaths = {
   design: '<path d="M3 20 20 3v17H3Zm7-3h7v-7m-3-1 2 2m-6 2 2 2"/>',
@@ -39,7 +40,14 @@ function renderWorkflow() {
     const links = element("div", "stage-links");
     for (const [id, label] of stage.tools) {
       const tool = toolsById.get(id);
-      if (tool && toolUrl(tool)) links.append(link(label || tool.title, toolUrl(tool)));
+      if (!tool) continue;
+      const url = toolUrl(tool) || repositoryUrl(tool);
+      if (url) links.append(link(label || tool.title, url));
+    }
+    if (stage.status) {
+      const status = element("span", "status", stage.status);
+      status.dataset.status = stage.status;
+      links.append(status);
     }
     node.append(header, links);
     workflow.append(node);
@@ -83,8 +91,10 @@ function createCard(tool) {
     const action = tool.action || "Open tool";
     actions.append(link(action, url, "button button-primary", action + " " + tool.title));
   }
-  if (tool.repository) {
-    actions.append(link("GitHub", sourceRoot + tool.repository, "button button-secondary", tool.title + " on GitHub"));
+  const repository = repositoryUrl(tool);
+  if (repository) {
+    const style = url ? "button button-secondary" : "button button-primary";
+    actions.append(link("GitHub", repository, style, tool.title + " on GitHub"));
   }
   if (!actions.childElementCount) actions.append(element("span", "result-count", "Page unavailable"));
 
@@ -95,16 +105,12 @@ function createCard(tool) {
 
 function prepareLibrary() {
   const search = document.querySelector("#search");
-  const category = document.querySelector("#category");
   const status = document.querySelector("#status");
   const filters = document.querySelector("#filters");
   const count = document.querySelector("#result-count");
   const emptyState = document.querySelector("#empty-state");
   const grid = document.querySelector("#tool-grid");
 
-  for (const value of [...new Set(toolCatalog.map((tool) => tool.category))].sort()) {
-    category.add(new Option(value, value));
-  }
   for (const value of ["Released", "In Development", "Planned"]) {
     status.add(new Option(value, value));
   }
@@ -121,8 +127,7 @@ function prepareLibrary() {
     const terms = search.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
     let visible = 0;
     for (const {tool, card, searchText} of entries) {
-      const matches = (!category.value || category.value === tool.category)
-        && (!status.value || status.value === tool.status)
+      const matches = (!status.value || status.value === tool.status)
         && terms.every((term) => searchText.includes(term));
       card.hidden = !matches;
       if (matches) visible++;

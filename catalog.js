@@ -55,17 +55,38 @@ const toolCatalog = [
     keywords: ["Lap time", "Speed profile", "Vehicle performance"],
   },
   {
-    id: "tires", title: "Tire Modeling & Parameter Fitting", category: "Tires", status: "Released",
+    id: "tires", title: "Tire Modeling & Parameter Fitting", category: "Tires", status: "In Development",
     repository: "Tire-Modeling-and-Parameter-Fitting", preview: "tires", action: "Open project",
     description: "Explore tire force models, parameter fitting and supporting MATLAB and Python analysis tools.",
     keywords: ["Tire forces", "Parameter fitting", "Tire stiffness"],
   },
+  {
+    id: "multibody", title: "Multibody Dynamics Model", category: "Vehicle Dynamics", status: "In Development",
+    repository: "Multibody-dynamics-model", url: null, preview: "multibody",
+    description: "A development project for multibody simulation and inverse dynamics optimization.",
+    keywords: ["Multibody dynamics", "Inverse dynamics", "Optimization"],
+  },
 ];
 
 const workflowStages = [
-  {title: "Design", icon: "design", tools: [["sizing", "Vehicle Initial Sizing"], ["geometry", "Suspension Geometry"]]},
-  {title: "Model", icon: "model", tools: [["kinematics", "Suspension Kinematics"], ["tires", "Tire Modeling"]]},
-  {title: "Simulate", icon: "simulate", tools: [["dynamics", "Suspension Dynamics"], ["track", "Track Data Tools"], ["lap", "LapSimLab"]]},
-  {title: "Optimize", icon: "optimize", tools: [["gears", "Gear System Designer"], ["damping", "Spring Damping Analysis"]]},
-  {title: "Validate", icon: "validate", tools: [["statics", "Suspension Statics"], ["lap", "LapSimLab"]]},
+  {
+    title: "Parameter Settings and Data", icon: "design",
+    tools: [["tires", "Tire Modeling"], ["track", "Track Data Tools"], ["sizing", "Vehicle Initial Sizing"]],
+  },
+  {
+    title: "Preliminary Analysis", icon: "simulate",
+    tools: [
+      ["lap", "LapSimLab"],
+      ["gears", "Gear System Designer"],
+      ["damping", "Spring Damping Analysis"],
+      ["geometry", "Suspension Geometry"],
+      ["dynamics", "Suspension Dynamics"],
+    ],
+  },
+  {
+    title: "Modeling and Simulation", icon: "model",
+    tools: [["kinematics", "Suspension Kinematics"], ["statics", "Suspension Statics"]],
+  },
+  {title: "Optimization", icon: "optimize", tools: [["multibody", "Multibody Dynamics Model"]]},
+  {title: "Validate and Testing", icon: "validate", tools: [], status: "In Development"},
 ];

@@ -309,6 +309,19 @@ function drawToolPreview(canvas, kind) {
         [(t) => 181 - 44 * (1 - Math.exp(-10 * t)) + 10 * t ** 2, soft],
       ]);
       break;
+    case "multibody": {
+      const chassis = [[203, 139], [311, 177], [461, 121], [357, 85]];
+      const linkage = [[172, 109], [227, 62], [328, 99], [413, 49], [505, 84], [468, 149]];
+      line(chassis, teal, 2.8, true, "#d6eae9");
+      line(linkage, teal, 3);
+      line([[227, 62], [203, 139], [328, 99], [311, 177]], blue, 2);
+      line([[413, 49], [357, 85], [505, 84], [461, 121], [468, 149]], blue, 2);
+      for (const [x, y] of [...chassis, ...linkage]) {
+        dot(ctx, x, y, 6, teal);
+        dot(ctx, x, y, 2.7, "#edf5f5");
+      }
+      break;
+    }
     default:
       line([[260, 152], [330, 44], [400, 152]], teal, 2.5, true);
       for (const [x, y] of [[260, 152], [330, 44], [400, 152]]) dot(ctx, x, y, 5, teal);

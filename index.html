@@ -47,7 +47,14 @@
         <p>Follow the design sequence or open a tool at any stage.</p>
       </header>
       <ol class="workflow-grid" id="workflow-grid"></ol>
-      <p class="workflow-note">Reuse a track geometry CSV from Track Data Tools in LapSimLab, or import a Kinematics project JSON into Suspension Statics.</p>
+      <section class="workflow-notes" aria-labelledby="workflow-notes-title">
+        <h3 id="workflow-notes-title">Data Import and Export</h3>
+        <ul>
+          <li><strong>Vehicle Initial Sizing</strong> provides export formats for LapSimLab, Gear System Designer, Spring Damping Analysis, Suspension Geometry, and Suspension Dynamics.</li>
+          <li><strong>Tire Modeling and Track Data Tools</strong> provide tire model data and track geometry CSV, respectively, for import into LapSimLab.</li>
+          <li><strong>Suspension Geometry</strong> exports hardpoint data for import into Suspension Kinematics and Suspension Statics.</li>
+        </ul>
+      </section>
     </section>
 
     <section class="section library" id="tools" aria-labelledby="library-title">
@@ -60,10 +67,6 @@
           <span class="visually-hidden">Search tools</span>
           <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.8"/><path d="m15 15 5 5"/></svg>
           <input id="search" type="search" placeholder="Search tools, keywords…" autocomplete="off">
-        </label>
-        <label class="select-field">
-          <span class="visually-hidden">Category</span>
-          <select id="category"><option value="">All categories</option></select>
         </label>
         <label class="select-field">
           <span class="visually-hidden">Status</span>

@@ -37,7 +37,7 @@ const toolCatalog = [
     keywords: ["Spring rate", "Damping ratio", "Time response"],
   },
   {
-    id: "gears", title: "Gear System Designer", category: "Powertrain", status: "Released",
+    id: "gears", title: "Gear System Designer", category: "Powertrain", status: "In Development",
     repository: "Transmission-system", preview: "gears",
     description: "Configure compound planetary gear trains, search gear combinations and preview gear mesh before CAD export.",
     keywords: ["Planetary gears", "Gear ratio", "CAD"],

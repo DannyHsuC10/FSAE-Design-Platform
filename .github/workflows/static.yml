@@ -9,12 +9,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
@@ -22,22 +16,59 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  package:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    outputs:
+      artifact_id: ${{ steps.upload.outputs.artifact_id }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
+        id: upload
         uses: actions/upload-pages-artifact@v4
         with:
           # Upload entire repository
           path: '.'
+
+  deploy:
+    needs: package
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      actions: read
+      pages: write
+      id-token: write
+    steps:
+      - name: Wait for Pages artifact to be listed
+        timeout-minutes: 2
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_ID: ${{ needs.package.outputs.artifact_id }}
+        run: |
+          if [[ -z "$ARTIFACT_ID" ]]; then
+            echo "::error::The Pages upload did not return an artifact ID."
+            exit 1
+          fi
+          endpoint="repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts?name=github-pages"
+          for attempt in {1..10}; do
+            if ids=$(gh api "$endpoint" --jq '.artifacts[] | select(.expired == false) | .id') &&
+              grep -Fxq "$ARTIFACT_ID" <<< "$ids"; then
+              echo "Pages artifact $ARTIFACT_ID is listed."
+              exit 0
+            fi
+            if [[ "$attempt" -lt 10 ]]; then
+              sleep 5
+            fi
+          done
+          echo "::error::Pages artifact $ARTIFACT_ID is not listed for this workflow run."
+          exit 1
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

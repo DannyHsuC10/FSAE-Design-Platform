@@ -61,6 +61,12 @@ const toolCatalog = [
     keywords: ["Tire forces", "Parameter fitting", "Tire stiffness"],
   },
   {
+    id: "vehicle-model", title: "Vehicle 14DOF Lab", category: "Vehicle Dynamics", status: "Released",
+    repository: "vehicle-model", preview: "dynamics",
+    description: "Run 14-DOF vehicle simulations for skidpad, acceleration and custom tracks, then review speed, wheel loads and suspension travel.",
+    keywords: ["14-DOF", "Skidpad", "Acceleration", "Vehicle telemetry"],
+  },
+  {
     id: "multibody", title: "Multibody Dynamics Model", category: "Vehicle Dynamics", status: "In Development",
     repository: "Multibody-dynamics-model", url: null, preview: "multibody",
     description: "A development project for multibody simulation and inverse dynamics optimization.",
@@ -85,7 +91,7 @@ const workflowStages = [
   },
   {
     title: "Modeling and Simulation", icon: "model",
-    tools: [["kinematics", "Suspension Kinematics"], ["statics", "Suspension Statics"]],
+    tools: [["kinematics", "Suspension Kinematics"], ["statics", "Suspension Statics"], ["vehicle-model", "Vehicle 14DOF Lab"]],
   },
   {title: "Optimization", icon: "optimize", tools: [["multibody", "Multibody Dynamics Model"]]},
   {title: "Validate and Testing", icon: "validate", tools: [], status: "In Development"},

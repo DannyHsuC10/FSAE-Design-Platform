@@ -12,6 +12,10 @@ python -m http.server 8000
 
 Visit `http://localhost:8000/`.
 
+## Design guidelines
+
+Use the [platform design guidelines](DESIGN_GUIDELINES.md) for shared visual styles, tool interfaces, catalog settings, and release checks.
+
 ## Add or update a tool
 
 1. Edit `toolCatalog` in `catalog.js`. Give the tool a unique `id`, title, description, category, keywords, and a status of `Released`, `In Development`, or `Planned`.

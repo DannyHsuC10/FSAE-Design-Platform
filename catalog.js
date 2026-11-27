@@ -62,7 +62,7 @@ const toolCatalog = [
   },
   {
     id: "vehicle-model", title: "Vehicle 14DOF Lab", category: "Vehicle Dynamics", status: "Released",
-    repository: "vehicle-model", preview: "dynamics",
+    repository: "vehicle-model", preview: "vehicle-model",
     description: "Run 14-DOF vehicle simulations for skidpad, acceleration and custom tracks, then review speed, wheel loads and suspension travel.",
     keywords: ["14-DOF", "Skidpad", "Acceleration", "Vehicle telemetry"],
   },

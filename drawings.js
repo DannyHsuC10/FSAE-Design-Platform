@@ -264,6 +264,39 @@ function drawToolPreview(canvas, kind) {
         [(t) => 148 + 31 * Math.cos(21 * t) * Math.exp(-1.9 * t), blue],
       ]);
       break;
+    case "vehicle-model": {
+      // Show the full chassis, its four wheel assemblies, and a cornering arrow.
+      ctx.setLineDash([5, 6]);
+      line([[146, 120], [510, 120]], gray, 1.3);
+      ctx.setLineDash([]);
+
+      for (const side of [-1, 1]) {
+        const wheelY = 120 + side * 56;
+        for (const [axle, mount] of [[219, 34], [435, 19]]) {
+          const mountY = 120 + side * mount;
+          line([[axle - 21, mountY], [axle, wheelY], [axle + 21, mountY]], soft, 2.5);
+          line([[axle - 22, wheelY - 13], [axle + 22, wheelY - 13],
+            [axle + 22, wheelY + 13], [axle - 22, wheelY + 13]], teal, 2.5, true, "#d6eae9");
+          line([[axle - 14, wheelY], [axle + 14, wheelY]], soft, 1.6);
+          dot(ctx, axle, wheelY, 3.7, blue);
+        }
+      }
+
+      line([[209, 95], [278, 88], [327, 92], [373, 105], [453, 109], [480, 120],
+        [453, 131], [373, 135], [327, 148], [278, 152], [209, 145]], teal, 2.8, true, "#dcefed");
+      line([[178, 82], [195, 82], [195, 158], [178, 158]], teal, 2.5, true, pale);
+      line([[460, 83], [480, 83], [492, 93], [492, 147], [480, 157], [460, 157]], teal, 2.5, true, pale);
+      line([[289, 105], [325, 103], [353, 120], [325, 137], [289, 135]], teal, 2, true, "#edf5f5");
+      dot(ctx, 315, 120, 5, blue);
+
+      ctx.beginPath();
+      ctx.arc(451, 122, 98, -.7, .7);
+      ctx.strokeStyle = blue;
+      ctx.lineWidth = 2.6;
+      ctx.stroke();
+      line([[541, 175], [526, 185], [528, 167]], blue, 2.6);
+      break;
+    }
     case "damping":
       chart("Time", "Displacement", [
         [(t) => 128 - 78 * Math.exp(-4.4 * t) * Math.cos(27 * t), teal],
